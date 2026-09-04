@@ -24,7 +24,7 @@ def service():
 
     # gestion des enregistrements en cours
     ADDON = addon()
-    recordIsActivate = ADDON.getSetting('enregistrement_activer')
+    recordIsActivate = ADDON.getSettingString('enregistrement_activer')
     if recordIsActivate == 'false':
         return
 
@@ -32,7 +32,7 @@ def service():
     return
 
     pathRecording = 'special://userdata/addon_data/plugin.video.MattStream2014/Enregistrement'
-#    pathRecording = ADDON.getSetting('path_enregistrement_programmation')
+#    pathRecording = ADDON.getSettingString('path_enregistrement_programmation')
     path = ''.join([pathRecording])
     if not xbmcvfs.exists(path):
         xbmcvfs.mkdir(path)
@@ -63,7 +63,8 @@ def service():
     # server_thread.join()
 
 
-if __name__ == '__main__':
+if __name__ == 
+'__main__':
     service()
 
     if isMatrix():
