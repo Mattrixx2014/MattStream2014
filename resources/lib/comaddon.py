@@ -52,7 +52,7 @@ class addon:
         return xbmcaddon.Addon(self.addonId).openSettings() if self.addonId else ADDONVS.openSettings()
 
     def getSetting(self, key):
-        return xbmcaddon.Addon(self.addonId).getSetting(key) if self.addonId else ADDONVS.getSetting(key)
+        return xbmcaddon.Addon(self.addonId).getSettingString(key) if self.addonId else ADDONVS.getSettingString(key)
 
     def setSetting(self, key, value):
         return xbmcaddon.Addon(self.addonId).setSetting(key, value) if self.addonId else ADDONVS.setSetting(key, value)
@@ -65,6 +65,7 @@ class addon:
 
 
 """
+
 from resources.lib.comaddon import dialog
 
 Utilisation :
@@ -111,7 +112,7 @@ class dialog:
         else:
             iseconds = iseconds * 1000
 
-        if (addon().getSetting('Block_Noti_sound') == 'true'):
+        if (addon().getSettingString('Block_Noti_sound') == 'true'):
             sound = True
 
         return self.DIALOG.notification(str(title), str(desc), xbmcgui.NOTIFICATION_INFO, iseconds, sound)
@@ -135,7 +136,8 @@ if progress_.iscanceled():
 progress_.VSclose(progress_)
 
 dialog = progress() non recommandé
-progress = progress() non recommandé
+progress = pro
+gress() non recommandé
 https://codedocs.xyz/xbmc/xbmc/group__python___dialog_progress.html
 """
 
@@ -204,7 +206,8 @@ class CountdownDialog(object):
             interval = self.interval
             while time_left > 0:
                 for _ in range(CountdownDialog.__INTERVALS):
-                    xbmc.sleep(int(interval * 1000 / CountdownDialog.__INTERVALS))
+                    xbmc.sleep(int(interv
+al * 1000 / CountdownDialog.__INTERVALS))
                     if self.is_canceled():
                         return
                     time_left = expires - int(time.time() - start)
@@ -258,12 +261,13 @@ class progress:
             return empty()
 
         if self.PROGRESS == None:
-            if not title:
+            if 
+not title:
                 title = addon().VSlang(30140)
             
             if large:
                 self.PROGRESS = xbmcgui.DialogProgress()
-            elif ADDONVS.getSetting('spinner_small') == 'true':
+            elif ADDONVS.getSettingString('spinner_small') == 'true':
                 self.PROGRESS = xbmcgui.DialogProgressBG()
             else:
                 self.PROGRESS = xbmcgui.DialogProgress()
@@ -330,7 +334,8 @@ https://codedocs.xyz/xbmc/xbmc/group__python__xbmcgui__listitem.html#ga0b7116686
 
 
 class listitem(xbmcgui.ListItem):
-    def __init__(self, label='', label2=''):
+   
+ def __init__(self, label='', label2=''):
         pass
 
     # Permet l'ajout d'un menu après la création d'un item
@@ -362,7 +367,7 @@ VSlog('testtttttttttttt')
 def VSlog(e, level=xbmc.LOGDEBUG):
     try:
         # rapelle l'ID de l'addon pour être appelé hors addon
-        if (ADDONVS.getSetting('debug') == 'true'):
+        if (ADDONVS.getSettingString('debug') == 'true'):
             if xbmc.getInfoLabel('system.buildversion')[0:2] >= '19':
                 level = xbmc.LOGINFO
             else:
@@ -400,7 +405,8 @@ def isKrypton():
 
 def isMatrix():
     try:
-        version = xbmc.getInfoLabel('system.buildversion')
+        version = xbmc.getInfoLabel
+('system.buildversion')
         if version[0:2] >= '19':
             return True
         else:
@@ -476,6 +482,7 @@ class siteManager:
         except AttributeError:
             self.propertiesPath = VSPath(path)
 
+
         # Chargement des properties
         try:
             with open(self.propertiesPath, 'r') as f:
@@ -532,7 +539,8 @@ class siteManager:
 
             # Propriété inconnue, on récupérere la valeur par défaut ...
             defaultProps = self._getDefaultProp(sourceName)
-            if propName not in defaultProps:
+            if 
+propName not in defaultProps:
                 return False
 
             # ... et on l'enregistre
@@ -596,7 +604,8 @@ class siteManager:
 
     
 
-class addonManager:
+class addonMa
+nager:
     # Demande l'installation d'un addon
     def installAddon(self, addon_id):
         xbmc.executebuiltin('InstallAddon(%s)' % addon_id, True)
