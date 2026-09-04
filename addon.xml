@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.MattStream2014" name="MattStream2014" version="1.0.0" provider-name="MattRixx2014-xbmc-addons">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.MattStream2014" name="MattStream2014" version="4.1.1-Matt" provider-name="MattRixx2014-xbmc-addons">
     <requires>
 
         <trycatch>
@@ -11,10 +11,10 @@
                 <import addon="xbmc.python" version="2.24.0"/>
             </catch>
         </trycatch>
-        <import addon="script.module.pyqrcode"/>
+        <import addon="script.module.qrcode"/>
         <import addon="script.module.requests"/>
         <import addon="script.module.dnspython" optional="true"/>
-		<import addon="script.module.myconnpy"/>
+		<import addon="repository.vstream"/>
 	<!-- Pour le DEBUG
 	<import addon="script.module.web-pdb" />
 	<import addon="script.module.pydevd" version="4.4.0"/>
@@ -52,23 +52,25 @@
 
     <extension point="xbmc.service" library="service.py"/>
     <extension point="xbmc.addon.metadata">
-        <summary lang="fr_FR">MattStream2014 par MattRixx2014, basé sur Vtream 2.9.9</summary>
-        <description lang="fr_FR">MattStream2014 est un module de streaming Francais pour les amis et la famille, retrouvez tous vos films, séries, dessins animés, documentaires/reportages, japanimes,  spectacle/concerts </description>
+        <summary lang="fr_FR">MattStream2014 par MattRixx2014, basé sur VStream 4.1.1</summary>
+        <description lang="fr_FR">MattStream2014 est un module de streaming Francais pour les amis et la famille, retrouvez tous vos films, séries, dessins animés, documentaires/reportages, japanimes, spectacle/concerts</description>
         <disclaimer lang="fr_FR">MattStream2014 est un addon de streaming videos</disclaimer>
-        <summary lang="fr_CA">MattStream2014 par MattRixx2014, basé sur Vtream 2.9.9</summary>
-        <description lang="fr_CA">MattStream2014 est un module de streaming Francais pour les amis et la famille, retrouvez tous vos films, séries, dessins animés, documentaires/reportages, japanimes,  spectacle/concerts </description>
+        <summary lang="fr_CA">MattStream2014 par MattRixx2014, basé sur VStream 4.1.1</summary>
+        <description lang="fr_CA">MattStream2014 est un module de streaming Francais pour les amis et la famille, retrouvez tous vos films, séries, dessins animés, documentaires/reportages, japanimes, spectacle/concerts</description>
         <disclaimer lang="fr_CA">MattStream2014 est un addon de streaming videos</disclaimer>
-        <summary lang="en_GB">MattStream2014 by MattRixx2014, based on Vtream 2.9.9</summary>
-        <description lang="en_GB">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts </description>
+        <summary lang="en_GB">MattStream2014 by MattRixx2014, based on VStream 4.1.1</summary>
+        <description lang="en_GB">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts</description>
         <disclaimer lang="en_GB">MattStream2014 is a video streaming addon</disclaimer>
-        <summary lang="en_NZ">MattStream2014 by MattRixx2014, based on Vtream 2.9.9</summary>
-        <description lang="en_NZ">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts </description>
+        <summary lang="en_NZ">MattStream2014 by MattRixx2014, based on VStream 4.1.1</summary>
+        <description lang="en_NZ">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts</description>
         <disclaimer lang="en_NZ">MattStream2014 is a video streaming addon</disclaimer>
-        <summary lang="en_US">MattStream2014 by MattRixx2014, based on Vtream 2.9.9</summary>
-        <description lang="en_US">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts </description>
+        <summary lang="en_US">MattStream2014 by MattRixx2014, based on VStream 4.1.1</summary>
+        <description lang="en_US">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts</description>
         <disclaimer lang="en_US">MattStream2014 is a video streaming addon</disclaimer>
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE</license>
+        <forum>https://github.com/Mattrixx2014/MattStream2014/issues</forum>
+        <source>https://github.com/Mattrixx2014/MattStream2014</source>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
