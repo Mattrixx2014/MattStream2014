@@ -38,8 +38,8 @@ class cHome:
         #oGui.addDir(SITE_IDENTIFIER, 'showTools', self.addons.VSlang(30033), 'tools.png', oOutputParameterHandler)
 
         view = False
-        if self.addons.getSetting('active-view') == 'true':
-            view = self.addons.getSetting('accueil-view')
+        if self.addons.getSettingString('active-view') == 'true':
+            view = self.addons.getSettingString('accueil-view')
 
         oGui.setEndOfDirectory(view)
 
@@ -90,7 +90,7 @@ class cHome:
         oGui.addDir('cDownload', 'getDownloadList', self.addons.VSlang(30229), 'download.png', oOutputParameterHandler)
 
         # les enregistrements de chaines TV ne sont plus opérationnelles
-        # folder = self.addons.getSetting('path_enregistrement')
+        # folder = self.addons.getSettingString('path_enregistrement')
         # if not folder:
         #     folder = 'special://userdata/addon_data/plugin.video.vstream/Enregistrement"/>'
         # oOutputParameterHandler.addParameter('siteUrl', folder)
@@ -134,7 +134,7 @@ class cHome:
         #oOutputParameterHandler.addParameter('sCat', '5')
         #oGui.addDir(SITE_IDENTIFIER, 'showSearchText', self.addons.VSlang(30080), 'buzz.png', oOutputParameterHandler)
 
-        if self.addons.getSetting('history-view') == 'true':
+        if self.addons.getSettingString('history-view') == 'true':
             oOutputParameterHandler.addParameter('siteUrl', 'http://Mattrixx2014')
             oGui.addDir('cHome', 'showHistory', self.addons.VSlang(30308), 'annees.png', oOutputParameterHandler)
 
