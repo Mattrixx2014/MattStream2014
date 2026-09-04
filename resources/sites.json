@@ -1,0 +1,13 @@
+{
+    "sites": {
+        "alldebrid": {
+            "label": "AllDebrid",
+            "active": "True"
+        },
+        "pastebin": {
+            "label": "PasteBin",
+            "active": "True",
+            "url": "https://pastebin.com/raw/"
+        }
+    }
+}

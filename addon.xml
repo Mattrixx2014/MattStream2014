@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.MattStream2014" name="MattStream2014" version="1.0.0" provider-name="MattRixx2014-xbmc-addons">
+    <requires>
+
+        <trycatch>
+            <try>
+                <import addon="xbmc.python" version="3.0.0"/>
+            </try>
+
+            <catch>
+                <import addon="xbmc.python" version="2.24.0"/>
+            </catch>
+        </trycatch>
+        <import addon="script.module.pyqrcode"/>
+        <import addon="script.module.requests"/>
+        <import addon="script.module.dnspython" optional="true"/>
+		<import addon="script.module.myconnpy"/>
+	<!-- Pour le DEBUG
+	<import addon="script.module.web-pdb" />
+	<import addon="script.module.pydevd" version="4.4.0"/>
+	-->
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+ 
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/gui/menuInformation.py">
+		        <label>[COLOR lightcoral]$ADDON[plugin.video.MattStream2014 30208][/COLOR]</label>
+				<visible>Window.IsVisible(home) + ListItem.Property(sMeta)</visible>
+            </item>
+            <item library="resources/lib/gui/menuAddBookmark.py">
+		        <label>[COLOR lightcoral]$ADDON[plugin.video.MattStream2014 30210][/COLOR]</label>
+				<visible>Window.IsVisible(home) + !ListItem.Property(isBookmark) + ListItem.Property(sMeta)</visible>
+            </item>
+            <item library="resources/lib/gui/menuSimil.py">
+		        <label>[COLOR lightcoral]$ADDON[plugin.video.MattStream2014 30213][/COLOR]</label>
+				<visible>Window.IsVisible(home) + ListItem.Property(sMeta)</visible>
+            </item>
+            <item library="resources/lib/gui/menuDelBookmark.py">
+		        <label>$ADDON[plugin.video.MattStream2014 30412]</label>
+				<visible>Window.IsVisible(home) + ListItem.Property(isBookmark)</visible>
+            </item>
+            <item library="resources/lib/gui/menuDelViewing.py">
+		        <label>$ADDON[plugin.video.MattStream2014 30412]</label>
+				<visible>Window.IsVisible(home) + ListItem.Property(isViewing)</visible>
+            </item>
+		</menu>
+    </extension>
+
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="fr_FR">MattStream2014 par MattRixx2014, basé sur Vtream 2.9.9</summary>
+        <description lang="fr_FR">MattStream2014 est un module de streaming Francais pour les amis et la famille, retrouvez tous vos films, séries, dessins animés, documentaires/reportages, japanimes,  spectacle/concerts </description>
+        <disclaimer lang="fr_FR">MattStream2014 est un addon de streaming videos</disclaimer>
+        <summary lang="fr_CA">MattStream2014 par MattRixx2014, basé sur Vtream 2.9.9</summary>
+        <description lang="fr_CA">MattStream2014 est un module de streaming Francais pour les amis et la famille, retrouvez tous vos films, séries, dessins animés, documentaires/reportages, japanimes,  spectacle/concerts </description>
+        <disclaimer lang="fr_CA">MattStream2014 est un addon de streaming videos</disclaimer>
+        <summary lang="en_GB">MattStream2014 by MattRixx2014, based on Vtream 2.9.9</summary>
+        <description lang="en_GB">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts </description>
+        <disclaimer lang="en_GB">MattStream2014 is a video streaming addon</disclaimer>
+        <summary lang="en_NZ">MattStream2014 by MattRixx2014, based on Vtream 2.9.9</summary>
+        <description lang="en_NZ">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts </description>
+        <disclaimer lang="en_NZ">MattStream2014 is a video streaming addon</disclaimer>
+        <summary lang="en_US">MattStream2014 by MattRixx2014, based on Vtream 2.9.9</summary>
+        <description lang="en_US">MattStream2014 is a French streaming module for friends and family, find all your movies, series, cartoons, documentaries/reports, japanimes, shows/concerts </description>
+        <disclaimer lang="en_US">MattStream2014 is a video streaming addon</disclaimer>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>screenshot-01.jpg</screenshot>
+            <screenshot>screenshot-02.jpg</screenshot>
+            <screenshot>screenshot-03.jpg</screenshot>
+        </assets>
+    </extension>
+</addon>
