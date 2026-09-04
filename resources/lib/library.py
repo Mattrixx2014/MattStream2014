@@ -25,8 +25,8 @@ class cLibrary:
     ADDON = addon()
 
     def __init__(self):
-        self.__sMovieFolder = self.ADDON.getSetting('Library_folder_Movies')
-        self.__sTVFolder = self.ADDON.getSetting('Library_folder_TVs')
+        self.__sMovieFolder = self.ADDON.getSettingString('Library_folder_Movies')
+        self.__sTVFolder = self.ADDON.getSettingString('Library_folder_TVs')
 
         if not self.__sMovieFolder:
             self.__sMovieFolder = 'special://userdata/addon_data/plugin.video.MattStream2014/Films'
@@ -58,6 +58,7 @@ class cLibrary:
 
         sMediaUrl = QuotePlus(sMediaUrl)
         #sFileName = QuotePlus(sFileName)
+
 
         sLink = 'plugin://plugin.video.MattStream2014/?function=play&site=cHosterGui&sFileName='
         sLink += sFileName + '&sMediaUrl=' + sMediaUrl + '&sHosterIdentifier=' + sHosterIdentifier
@@ -109,12 +110,13 @@ class cLibrary:
         oGui = cGui()
         oOutputParameterHandler = cOutputParameterHandler()
 
-        folder = self.ADDON.getSetting('Library_folder_Movies')
+        folder = self.ADDON.getSettingString('Library_folder_Movies')
         oOutputParameterHandler.addParameter('siteUrl', folder)
         oGui.addDir(SITE_IDENTIFIER, 'openLibrary', self.ADDON.VSlang(30120), 'films.png', oOutputParameterHandler)
 
-        folder = self.ADDON.getSetting('Library_folder_TVs')
-        oOutputParameterHandler.addParameter('siteUrl', folder)
+        folder = self.ADDON.getSettingString('Library_folder_TVs')
+        o
+OutputParameterHandler.addParameter('siteUrl', folder)
         oGui.addDir(SITE_IDENTIFIER, 'openLibrary', self.ADDON.VSlang(30121), 'series.png', oOutputParameterHandler)
 
         oGui.setEndOfDirectory()
@@ -123,7 +125,7 @@ class cLibrary:
     def getRecords(self):
         oGui = cGui()
 
-        folder = self.ADDON.getSetting('path_enregistrement')
+        folder = self.ADDON.getSettingString('path_enregistrement')
         if not folder:
             folder = 'special://userdata/addon_data/plugin.video.MattStream2014/Enregistrement"/>'
         oOutputParameterHandler = cOutputParameterHandler()
@@ -167,7 +169,8 @@ class cLibrary:
             oGui.setEndOfDirectory()
 
     def Delfile(self):
-        oInputParameterHandler = cInputParameterHandler()
+        oInputPar
+ameterHandler = cInputParameterHandler()
         sFile = oInputParameterHandler.getValue('sFile')
 
         xbmcvfs.delete(sFile)

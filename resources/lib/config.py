@@ -77,7 +77,8 @@ class GestionCookie:
 
         cookies = ''
         for c in t1:
-            cookies = cookies + c + '=' + t1[c] + ';'
+            cookies = cookies + c +
+ '=' + t1[c] + ';'
         cookies = cookies[:-1]
         return cookies
 
@@ -136,7 +137,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
 
     # Sinon on gere par MattStream2014 via la lib TMDB
     sType = str(metaType).replace('1', 'movie').replace('2', 'tvshow').replace('3', 'collection').replace('4', 'anime')\
-                         .replace('5', 'season').replace('6', 'episode')
+          
+               .replace('5', 'season').replace('6', 'episode')
 
     try:
         tmdb_id = xbmc.getInfoLabel('ListItem.Property(TmdbId)')
@@ -189,7 +191,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
         ADDON = addon()
 
         def __init__(self, *args, **kwargs):
-            xbmcgui.WindowXMLDialog.__init__(self)
+            xbmcgui.WindowXMLDialog.__init__(
+self)
             self.meta = kwargs['meta']
             pass
 
@@ -203,9 +206,9 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
 
         def onInit(self):
             # par default le resumer#
-            color = ADDON.getSetting('deco_color')
+            color = ADDON.getSettingString('deco_color')
             self.setProperty('color', color)
-            self.poster = 'https://image.tmdb.org/t/p/%s' % self.ADDON.getSetting('poster_tmdb')
+            self.poster = 'https://image.tmdb.org/t/p/%s' % self.ADDON.getSettingString('poster_tmdb')
             self.none_poster = 'https://eu.ui-avatars.com/api/?background=000&size=512&name=%s&color=FFF&font-size=0.33'
 
             # self.getControl(50).setVisible(False)
@@ -240,7 +243,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
                 data = json.loads(meta['crew'])
                 for i in data:
                     slabel = i['name']
-                    slabel2 = i['job']
+                    slabel2 
+= i['job']
                     if i.get('profile_path'):
                         sicon = self.poster + str(i['profile_path'])
                     else:
@@ -283,7 +287,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
 
             # title
             # self.getControl(1).setLabel(meta['title'])
-            meta['title'] = sTitle
+   
+         meta['title'] = sTitle
 
             # self.getControl(49).setVisible(True)
             # self.getControl(2).setImage(meta['cover_url'])
@@ -331,7 +336,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
                     listitem_.setArt({'icon': sThumbnail})
                     listitem_.setProperty('TmdbId', str(i['id']))
                     listitems.append(listitem_)
-                self.getControl(control).addItems(listitems)
+                self.getControl(control).addItems(listitems
+)
 
             except Exception as e:
                 pass
@@ -381,7 +387,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
                             birthday = datetime(*(time.strptime(meta['birthday'], '%Y-%m-%d')[0:6]))
                             age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
                             age = '%s Ans' % age
-                        except:
+                        exce
+pt:
                             age = ''
                     else:
                         age = meta['deathday']
@@ -434,7 +441,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
                 try:
                     from resources.lib.db import cDb
                     with cDb() as db:
-                        db.insert_bookmark(metaBM)
+       
+                 db.insert_bookmark(metaBM)
                 except:
                     pass
 
@@ -484,7 +492,8 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
             self.close()
 
         def onAction(self, action):
-            if action.getId() in (104, 105, 1, 2):
+            if action.getId() in (104, 105, 1
+, 2):
                 return
 
             if action.getId() in (9, 10, 11, 30, 92, 216, 247, 257, 275, 61467, 61448):

@@ -50,7 +50,8 @@ class cPlayer(xbmc.Player):
         self.saisonUrl = oInputParameterHandler.getValue('saisonUrl')
         self.nextSaisonFunc = oInputParameterHandler.getValue('nextSaisonFunc')
         self.movieUrl = oInputParameterHandler.getValue('movieUrl')
-        self.movieFunc = oInputParameterHandler.getValue('movieFunc')
+ 
+       self.movieFunc = oInputParameterHandler.getValue('movieFunc')
         self.sTmdbId = oInputParameterHandler.getValue('sTmdbId')
 
         self.playBackEventReceived = False
@@ -109,10 +110,11 @@ class cPlayer(xbmc.Player):
                 item.setSubtitles(self.Subtitles_file)
                 VSlog('Load SubTitle :' + str(self.Subtitles_file))
                 self.SubtitleActive = True
-            except:
+   
+         except:
                 VSlog("Can't load subtitle:" + str(self.Subtitles_file))
 
-        player_conf = self.ADDON.getSetting('playerPlay')
+        player_conf = self.ADDON.getSettingString('playerPlay')
         # Si lien dash, methode prioritaire
         mpd = splitext(urlHostName(sUrl))[-1] in [".mpd", ".m3u8"]
         mpd |= '&ct=6&' in sUrl     # mpd venant de ok.ru, n'a pas d'extension
@@ -150,11 +152,12 @@ class cPlayer(xbmc.Player):
 
         # active/désactive les sous-titres suivant l'option choisie dans la config
         if self.getAvailableSubtitleStreams():
-            if self.ADDON.getSetting('srt-view') == 'true':
+            if self.ADDON.getSettingString('srt-view') == 'true':
                 self.showSubtitles(True)
             else:
                 self.showSubtitles(False)
-                dialog().VSinfo('Des sous-titres sont disponibles', 'Sous-titres', 4)
+                dialog().VSinfo('Des sous-tit
+res sont disponibles', 'Sous-titres', 4)
 
         waitingNext = 0
 
@@ -212,7 +215,8 @@ class cPlayer(xbmc.Player):
         try:
             with cDb() as db:
                 if self.isPlaying():
-                    self.totalTime = self.getTotalTime()
+                    self.totalTime = s
+elf.getTotalTime()
                     self.currentTime = self.getTime()
                     self.infotag = self.getVideoInfoTag()
 
@@ -250,7 +254,8 @@ class cPlayer(xbmc.Player):
                             if self.sSaison:
                                 meta['season'] = self.sSaison
                             meta['seasonUrl'] = self.saisonUrl
-                            meta['seasonFunc'] = self.nextSaisonFunc
+                            meta['season
+Func'] = self.nextSaisonFunc
                             db.insert_watched(meta)
 
                             # RAZ du point de reprise
@@ -289,7 +294,8 @@ class cPlayer(xbmc.Player):
 
                                 # les 'divers' de moins de 45 minutes peuvent être de type 'adultes'
                                 # pas de sauvegarde en attendant mieux
-                                if self.sCat == '5' and self.totalTime < 2700:
+                                if self.
+sCat == '5' and self.totalTime < 2700:
                                     pass
                                 else:
                                     if self.movieUrl and self.movieFunc:
@@ -333,7 +339,8 @@ class cPlayer(xbmc.Player):
         self.playBackEventReceived = True
 
         with cDb() as db:
-            # Reprendre la lecture
+            
+# Reprendre la lecture
             # web_pdb.set_trace()
             if self.isPlayingVideo() and self.getTime() < 180:  # si supérieur à 3 minutes, la gestion de la reprise est assuré par KODI
                 self.infotag = self.getVideoInfoTag()
@@ -356,14 +363,14 @@ class cPlayer(xbmc.Player):
 
     def __setWatchlist(self, sEpisode=''):
         # Suivi de lecture dans Trakt si compte
-        if self.ADDON.getSetting('bstoken') == '':
+        if self.ADDON.getSettingString('bstoken') == '':
             return
         plugins = __import__('resources.lib.trakt', fromlist=['trakt']).cTrakt()
         function = getattr(plugins, 'getAction')
         function(Action="SetWatched", sEpisode=sEpisode)
 
     def __getPlayerType(self):
-        sPlayerType = self.ADDON.getSetting('playerType')
+        sPlayerType = self.ADDON.getSettingString('playerType')
 
         try:
             if sPlayerType == '0':
@@ -378,4 +385,5 @@ class cPlayer(xbmc.Player):
                 VSlog('playertype from config: dvdplayer')
                 return xbmc.PLAYER_CORE_DVDPLAYER
         except:
-            return False
+            return F
+alse

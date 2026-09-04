@@ -31,15 +31,15 @@ class cDb(object):
             REALDB = VSPath(DB)
 
         try:
-            if  xbmcaddon.Addon('plugin.video.MattStream2014').getSetting('db_ext') == 'true':
+            if  xbmcaddon.Addon('plugin.video.MattStream2014').getSettingString('db_ext') == 'true':
 
                 self.DB_MySql = True
                 import mysql.connector as dbsql
                 
-                db_address = xbmcaddon.Addon('plugin.video.MattStream2014').getSetting('db_address')
-                db_port = int(xbmcaddon.Addon('plugin.video.MattStream2014').getSetting('db_port'))
-                db_user = xbmcaddon.Addon('plugin.video.MattStream2014').getSetting('db_user')
-                db_pass = xbmcaddon.Addon('plugin.video.MattStream2014').getSetting('db_pass')
+                db_address = xbmcaddon.Addon('plugin.video.MattStream2014').getSettingString('db_address')
+                db_port = int(xbmcaddon.Addon('plugin.video.MattStream2014').getSettingString('db_port'))
+                db_user = xbmcaddon.Addon('plugin.video.MattStream2014').getSettingString('db_user')
+                db_pass = xbmcaddon.Addon('plugin.video.MattStream2014').getSettingString('db_pass')
               
                                
             else:
@@ -52,7 +52,8 @@ class cDb(object):
                 
         except:
             if self.DB_MySql:
-                raise ValueError('MySQL not enabled or not setup correctly')
+                raise V
+alueError('MySQL not enabled or not setup correctly')
                 VSlog('MySQL not enabled or not setup correctly')
             else: 
                 raise ValueError('Sqlite not enabled or not setup correctly')
@@ -91,7 +92,8 @@ class cDb(object):
             
             if self.dbcur.fetchone() is None:
                 if self.DB_MySql:
-                    self._create_tables_Mysql()
+        
+            self._create_tables_Mysql()
                 else : 
                     self._create_tables()
             return self
@@ -151,7 +153,8 @@ class cDb(object):
                      "siteurl TEXT,"\
                      "site TEXT,"\
                      "fav TEXT,"\
-                     "cat TEXT,"\
+                     "cat TE
+XT,"\
                      "season INT,"\
                      "PRIMARY KEY (addon_id),"\
                      "UNIQUE (title_id(255))"\
@@ -211,7 +214,8 @@ class cDb(object):
     def _create_tables(self, dropTable=''):
 
         if dropTable != '':
-            self.dbcur.execute("DROP TABLE IF EXISTS " + dropTable)
+            self
+.dbcur.execute("DROP TABLE IF EXISTS " + dropTable)
             self.db.commit()
 
         ''' Create table '''
@@ -262,7 +266,8 @@ class cDb(object):
         self.dbcur.execute(sql_create)
 
         sql_create = "CREATE TABLE IF NOT EXISTS viewing ("\
-                     "addon_id integer PRIMARY KEY AUTOINCREMENT, "\
+                     "addon_id integer PRIMARY KEY AUTOINC
+REMENT, "\
                      "tmdb_id TEXT, "\
                      "title_id TEXT, "\
                      "title TEXT, "\
@@ -324,7 +329,8 @@ class cDb(object):
 
         # title = Unquote(meta['title']).decode('ascii', 'ignore')
         title = self.str_conv(Unquote(meta['title']))
-        disp = meta['disp']
+        disp = meta['disp'
+]
         icon = 'icon.png'
 
         try:
@@ -376,7 +382,8 @@ class cDb(object):
             # if self.DB_MySql:
             self.dbcur.execute(sql_delete)
             self.db.commit()
-            dialog().VSinfo(addon().VSlang(30041))
+          
+  dialog().VSinfo(addon().VSlang(30041))
             oGui.updateDirectory()
             return False, False
         except Exception as e:
@@ -424,7 +431,8 @@ class cDb(object):
             if 'no such column' in str(e) or 'no column named' in str(e) or 'no such table' in str(e):
                 if 'named cat' in str(e):  # ajout nouvelle colonne 'cat'
                     self.dbcur.execute("ALTER TABLE watched add column cat TEXT")
-                    self.db.commit()
+                    self.db.commit(
+)
                     VSlog('Table recreated : watched')
 
                 if 'named tmdb_id' in str(e):  # ajout nouvelle colonne 'tmdb_id'
@@ -474,6 +482,7 @@ class cDb(object):
                 matchedcat = data['cat']
                 if matchedcat:
                     return int(matchedcat) == int(cat)
+
 
             return True if matchedrow else False
         except Exception as e:
@@ -531,6 +540,7 @@ class cDb(object):
 
     # conversion de l'ancienne table watched
     # def convertWatched(self):
+
         # try:
             # if self.DB_MySql:
             # self.dbcur.execute("ALTER TABLE watched RENAME COLUMN title TO title_id")
@@ -592,7 +602,8 @@ class cDb(object):
             if self.DB_MySql:
                 ex = 'INSERT INTO resume (title, hoster, point, total) VALUES (%s, %s, %s, %s)'
             else : 
-                ex = 'INSERT INTO resume (title, hoster, point, total) VALUES (?, ?, ?, ?)'
+                ex = 'INSERT INTO resume (title, hoster
+, point, total) VALUES (?, ?, ?, ?)'
 
                 
             self.dbcur.execute(ex, (title, site, point, total))
@@ -650,7 +661,8 @@ class cDb(object):
     #  Bookmark fonctions
     #  ***********************************
 
-    def insert_bookmark(self, meta):
+    def insert_bookmark(self, me
+ta):
 
         title = self.str_conv(meta['title'])
         siteurl = QuotePlus(meta['siteurl'])
@@ -708,7 +720,8 @@ class cDb(object):
             siteUrl = QuotePlus(sSiteUrl)
             title = self.str_conv(sMovieTitle)
             title = title.replace("'", r"''")
-            sql_delete = "DELETE FROM favorite WHERE siteurl = '%s' AND title = '%s'" % (siteUrl, title)
+            sql_delete = "DELETE FROM favorite W
+HERE siteurl = '%s' AND title = '%s'" % (siteUrl, title)
 
         # Supprimer un bookmark selon son url
         elif sSiteUrl:
@@ -763,7 +776,8 @@ class cDb(object):
         sTmdbId = meta['sTmdbId'] if 'sTmdbId' in meta else ''
 
         # on enleve avant de remettre pour retrier
-        ex = "DELETE FROM viewing WHERE title_id = '%s' and cat = '%s'" % (titleWatched, cat)
+        ex = "DELETE FROM viewing WHE
+RE title_id = '%s' and cat = '%s'" % (titleWatched, cat)
         try:
             # if self.DB_MySql:
             self.dbcur.execute(ex)
@@ -812,7 +826,8 @@ class cDb(object):
         if not sTitleWatched:       # delete a category or all
             sql_delete = "DELETE FROM viewing"
             if 'cat' in meta:
-                sql_delete += " where cat = '%s'" % meta['cat']
+                sql_delete += " where cat =
+ '%s'" % meta['cat']
         else:
             sql_delete= "DELETE FROM viewing WHERE title_id = '%s'" % sTitleWatched
             if 'cat' in meta:
@@ -871,7 +886,8 @@ class cDb(object):
 
         try:
             # if self.DB_MySql:
-            self.dbcur.execute(sql_select)
+            self
+.dbcur.execute(sql_select)
             matchedrow = self.dbcur.fetchall()
             return matchedrow
         except Exception as e:
@@ -897,59 +913,6 @@ class cDb(object):
         sql_select = "UPDATE download SET status = '0' WHERE status = '2' AND url = '%s'" % url
 
         try:
-            # if self.DB_MySql:
-            self.dbcur.execute(sql_select)
-            self.db.commit()
-            return False, False
-        except Exception as e:
-            VSlog('SQL ERROR %s' % sql_select)
-            return False, False
+      
 
-    def del_download(self, meta):
-
-        if len(meta['url']) > 1:
-            url = QuotePlus(meta['url'])
-            sql_select = "DELETE FROM download WHERE url = '%s'" % url
-        elif len(meta['path']) > 1:
-            path = meta['path']
-            sql_select = "DELETE FROM download WHERE path = '%s'" % path
-        else:
-            return
-
-        try:
-            # if self.DB_MySql:
-            self.dbcur.execute(sql_select)
-            self.db.commit()
-            return False, False
-        except Exception as e:
-            VSlog('SQL ERROR %s' % sql_select)
-            return False, False
-
-    def cancel_download(self):
-        sql_select = "UPDATE download SET status = '0' WHERE status = '1'"
-        try:
-            # if self.DB_MySql:
-            self.dbcur.execute(sql_select)
-            self.db.commit()
-            return False, False
-        except Exception as e:
-            VSlog('SQL ERROR %s' % sql_select)
-            return False, False
-
-    def update_download(self, meta):
-
-        path = meta['path']
-        size = meta['size']
-        totalsize = meta['totalsize']
-        status = meta['status']
-
-        sql_select = "UPDATE download set size = '%s', totalsize = '%s', status= '%s' WHERE path = '%s'" % (size, totalsize, status, path)
-
-        try:
-            # if self.DB_MySql:
-            self.dbcur.execute(sql_select)
-            self.db.commit()
-            return False, False
-        except Exception as e:
-            VSlog('SQL ERROR %s' % sql_select)
-            return False, False
+... [Content truncated]

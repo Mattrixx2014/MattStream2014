@@ -54,7 +54,8 @@ class main:
         if pluginPath == 'plugin://plugin.video.MattStream2014/extrafanart/':
             return
 
-        oInputParameterHandler = cInputParameterHandler()
+   
+     oInputParameterHandler = cInputParameterHandler()
 
         if oInputParameterHandler.exist('function'):
             sFunction = oInputParameterHandler.getValue('function')
@@ -121,7 +122,8 @@ class main:
             if isTrakt(sSiteName, sFunction):
                 return
 
-            if isSearch(sSiteName, sFunction):
+          
+  if isSearch(sSiteName, sFunction):
                 return
 
             if sSiteName == 'globalRun':
@@ -169,7 +171,8 @@ class main:
                 function()
             except Exception as e:
                 progress().VSclose()  # Referme le dialogue en cas d'exception, sinon blocage de Kodi
-                VSlog('could not load site: ' + sSiteName + ' error: ' + str(e))
+                VSlog('could not load 
+site: ' + sSiteName + ' error: ' + str(e))
                 import traceback
                 traceback.print_exc()
                 return
@@ -177,7 +180,7 @@ class main:
 
 def setSetting(plugin_id, value):
     addons = addon()
-    setting = addons.getSetting(plugin_id)
+    setting = addons.getSettingString(plugin_id)
 
     # modifier si différent
     if setting != value:
@@ -202,7 +205,7 @@ def setSettings(oInputParameterHandler):
         if plugin_id:
             value = oInputParameterHandler.getValue('value' + str(i))
             value = value.replace('\n', '')
-            oldSetting = addons.getSetting(plugin_id)
+            oldSetting = addons.getSettingString(plugin_id)
             # modifier si différent
             if oldSetting != value:
                 addons.setSetting(plugin_id, value)
@@ -231,6 +234,7 @@ def isFav(sSiteName, sFunction):
     if sSiteName == 'cFav':
         plugins = __import__('resources.lib.bookmark', fromlist=['cFav']).cFav()
         function = getattr(plugins, sFunction)
+
         function()
         return True
     return False
@@ -303,7 +307,8 @@ def _pluginSearch(plugin, sSearchText):
     window(10101).setProperty('search', 'true')
 
     try:
-        plugins = __import__('resources.sites.%s' % plugin['identifier'], fromlist=[plugin['identifier']])
+        plugins = __import__('resources.sites.%s' % plugin['identifier'], 
+fromlist=[plugin['identifier']])
         function = getattr(plugins, plugin['search'][1])
         sUrl = plugin['search'][0] + str(sSearchText)
 
