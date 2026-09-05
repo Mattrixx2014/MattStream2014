@@ -18,8 +18,6 @@ from resources.lib.util import cUtil, QuotePlus
 SITE_IDENTIFIER = 'cLibrary'
 SITE_NAME = 'Library'
 
-# sources.xml
-
 
 class cLibrary:
     ADDON = addon()
@@ -57,16 +55,15 @@ class cLibrary:
             sCat = '2'
 
         sMediaUrl = QuotePlus(sMediaUrl)
-        #sFileName = QuotePlus(sFileName)
-
+        sFileName = QuotePlus(sFileName)
 
         sLink = 'plugin://plugin.video.MattStream2014/?function=play&site=cHosterGui&sFileName='
         sLink += sFileName + '&sMediaUrl=' + sMediaUrl + '&sHosterIdentifier=' + sHosterIdentifier
 
         sTitle = sFileName
 
-        if sCat == '1':  # film
-            #sTitle = cUtil().CleanName(sTitle)
+        if sCat == '1':
+            sTitle = cUtil().CleanName(sTitle)
             sTitle = self.showKeyBoard(sTitle, 'Nom du fichier')
 
             try:
@@ -79,8 +76,8 @@ class cLibrary:
             except:
                 dialog().VSinfo('Rajout impossible')
 
-        elif sCat == '2':  # serie
-            #sTitle = cUtil().CleanName(sTitle)
+        elif sCat == '2':
+            sTitle = cUtil().CleanName(sTitle)
             sFTitle = self.showKeyBoard(sTitle, 'Saison : Recommandé NomDeSerie/Saison01')
 
             try:
@@ -115,8 +112,7 @@ class cLibrary:
         oGui.addDir(SITE_IDENTIFIER, 'openLibrary', self.ADDON.VSlang(30120), 'films.png', oOutputParameterHandler)
 
         folder = self.ADDON.getSettingString('Library_folder_TVs')
-        o
-OutputParameterHandler.addParameter('siteUrl', folder)
+        oOutputParameterHandler.addParameter('siteUrl', folder)
         oGui.addDir(SITE_IDENTIFIER, 'openLibrary', self.ADDON.VSlang(30121), 'series.png', oOutputParameterHandler)
 
         oGui.setEndOfDirectory()
@@ -127,7 +123,7 @@ OutputParameterHandler.addParameter('siteUrl', folder)
 
         folder = self.ADDON.getSettingString('path_enregistrement')
         if not folder:
-            folder = 'special://userdata/addon_data/plugin.video.MattStream2014/Enregistrement"/>'
+            folder = 'special://userdata/addon_data/plugin.video.MattStream2014/Enregistrement/'
         oOutputParameterHandler = cOutputParameterHandler()
         oOutputParameterHandler.addParameter('siteUrl', folder)
         oGui.addDir(SITE_IDENTIFIER, 'openLibrary', self.ADDON.VSlang(30225), 'download.png', oOutputParameterHandler)
@@ -148,8 +144,8 @@ OutputParameterHandler.addParameter('siteUrl', folder)
 
         addon_handle = None
         for i in data:
-            path = VSPath(sFile + '/' + i)  # Suppression du special: pour plus tard
-            sTitle = os.path.basename(path)  # Titre du fichier .strm
+            path = VSPath(sFile + '/' + i)
+            sTitle = os.path.basename(path)
 
             if '.strm' in i:
                 sHosterUrl = sFile + '/' + i
@@ -168,9 +164,8 @@ OutputParameterHandler.addParameter('siteUrl', folder)
         else:
             oGui.setEndOfDirectory()
 
-    def Delfile(self):
-        oInputPar
-ameterHandler = cInputParameterHandler()
+    def DelFile(self):
+        oInputParameterHandler = cInputParameterHandler()
         sFile = oInputParameterHandler.getValue('sFile')
 
         xbmcvfs.delete(sFile)
@@ -188,7 +183,7 @@ ameterHandler = cInputParameterHandler()
 
     def showKeyBoard(self, sDefaultText='', Heading=''):
         keyboard = xbmc.Keyboard(sDefaultText)
-        keyboard.setHeading(Heading)  # optional
+        keyboard.setHeading(Heading)
         keyboard.doModal()
         if keyboard.isConfirmed():
             sSearchText = keyboard.getText()
