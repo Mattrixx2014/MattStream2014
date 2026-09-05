@@ -119,17 +119,17 @@ class cUtil:
 
             return text  # leave as is
 
-        return re.sub('&#?\w+;', fixup, text)
+        return re.sub(r'&#?w+;', fixup, text)
 
     def titleWatched(self, title):
 
         title = self.formatUTF8(title)
 
-        # cherche la saison et episode puis les balises [color]titre[/color]
+        # cherche la saison et episode puis les balises
         # title, saison = self.getSaisonTitre(title)
         # title, episode = self.getEpisodeTitre(title)
         # supprimer les balises
-        title = re.sub(r'\[.*\]|\(.*\)', r'', str(title))
+        title = re.sub(r'[.*]|(.*)', r'', str(title))
         title = title.replace('VF', '').replace('VOSTFR', '').replace('FR', '')
         # title = re.sub(r'[0-9]+?', r'', str(title))
         title = title.replace('-', ' ')  # on garde un espace pour que Orient-express ne devienne pas Orientexpress pour la recherche tmdb
@@ -147,17 +147,17 @@ class cUtil:
 
         # on cherche l'annee
         annee = ''
-        m = re.search('(\([0-9]{4}\))', name)
+        m = re.search(r'(d{4})', name)
         if m:
             annee = str(m.group(0))
             name = name.replace(annee, '')
 
         # Suppression des ponctuations
-        name = re.sub("[\’\'\-\–\:\+\._]", ' ', name)
-        name = re.sub("[\,\&\?\!]", '', name)
+        name = re.sub(r"[\''-–:+._]", ' ', name)
+        name = re.sub(r"[,&?!]", '', name)
 
         # vire tag
-        name = re.sub('[\(\[].+?[\)\]]', '', name)
+        name = re.sub(r'[([].+?[])]', '', name)
         name = name.replace('[', '').replace(']', '') # crochet orphelin
 
         # enlève les accents, si nécessaire
@@ -177,7 +177,7 @@ class cUtil:
         return name
 
     def getSerieTitre(self, sTitle):
-        serieTitle = re.sub(r'\[.*\]|\(.*\)', r'', sTitle)
+        serieTitle = re.sub(r'[.*]|(.*)', r'', sTitle)
         serieTitle = re.sub('[- –]+$', '', serieTitle)
 
         if '|' in serieTitle:
@@ -186,7 +186,7 @@ class cUtil:
         return serieTitle
 
     def getEpisodeTitre(self, sTitle):
-        string = re.search('(?i)(e(?:[a-z]+sode\s?)*([0-9]+))', sTitle)
+        string = re.search(r'(?i)(e(?:[a-z]+sodes?)*([0-9]+))', sTitle)
         if string:
             sTitle = sTitle.replace(string.group(1), '')
             return sTitle, True
@@ -197,7 +197,7 @@ class cUtil:
         s = s.replace(' ', '')
         try:
             s = s.replace('!+[]', '1').replace('!![]', '1').replace('[]', '0')
-            s = re.sub(r'(\([^()]+)\+\[\]\)', '(\\1)*10)', s)  # si le bloc fini par +[] >> *10
+            s = re.sub(r'(([^()]+)+\[\])', '(\\1)*10)', s)  # si le bloc fini par +[] >> *10
             s = re.sub(r'\[([^\]]+)\]', 'str(\\1)', s)
             if s[0] == '+':
                 s = s[1:]
