@@ -115,7 +115,7 @@ class dialog:
         else:
             iseconds = iseconds * 1000
 
-        if (addon().getSettingString('Block_Noti_sound') == 'true'):
+        if (str(addon().getSetting('Block_Noti_sound')) == 'true'):
             sound = True
 
         return self.DIALOG.notification(str(title), str(desc), xbmcgui.NOTIFICATION_INFO, iseconds, sound)
