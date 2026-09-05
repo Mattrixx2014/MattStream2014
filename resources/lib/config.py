@@ -77,8 +77,7 @@ class GestionCookie:
 
         cookies = ''
         for c in t1:
-            cookies = cookies + c +
- '=' + t1[c] + ';'
+            cookies = cookies + c + '=' + t1[c] + ';'
         cookies = cookies[:-1]
         return cookies
 
@@ -136,9 +135,7 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
     DIALOG = dialog()
 
     # Sinon on gere par MattStream2014 via la lib TMDB
-    sType = str(metaType).replace('1', 'movie').replace('2', 'tvshow').replace('3', 'collection').replace('4', 'anime')\
-          
-               .replace('5', 'season').replace('6', 'episode')
+    sType = str(metaType).replace('1', 'movie').replace('2', 'tvshow').replace('3', 'collection').replace('4', 'anime').replace('5', 'season').replace('6', 'episode')
 
     try:
         tmdb_id = xbmc.getInfoLabel('ListItem.Property(TmdbId)')
@@ -191,8 +188,7 @@ def WindowsBoxes(sTitle, siteUrl, metaType, year, sSite, sFav, sCat):
         ADDON = addon()
 
         def __init__(self, *args, **kwargs):
-            xbmcgui.WindowXMLDialog.__init__(
-self)
+            xbmcgui.WindowXMLDialog.__init__(self)
             self.meta = kwargs['meta']
             pass
 
@@ -243,8 +239,7 @@ self)
                 data = json.loads(meta['crew'])
                 for i in data:
                     slabel = i['name']
-                    slabel2 
-= i['job']
+                    slabel2 = i['job']
                     if i.get('profile_path'):
                         sicon = self.poster + str(i['profile_path'])
                     else:
@@ -287,8 +282,7 @@ self)
 
             # title
             # self.getControl(1).setLabel(meta['title'])
-   
-         meta['title'] = sTitle
+            meta['title'] = sTitle
 
             # self.getControl(49).setVisible(True)
             # self.getControl(2).setImage(meta['cover_url'])
@@ -336,8 +330,7 @@ self)
                     listitem_.setArt({'icon': sThumbnail})
                     listitem_.setProperty('TmdbId', str(i['id']))
                     listitems.append(listitem_)
-                self.getControl(control).addItems(listitems
-)
+                self.getControl(control).addItems(listitems)
 
             except Exception as e:
                 pass
@@ -387,8 +380,7 @@ self)
                             birthday = datetime(*(time.strptime(meta['birthday'], '%Y-%m-%d')[0:6]))
                             age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
                             age = '%s Ans' % age
-                        exce
-pt:
+                        except:
                             age = ''
                     else:
                         age = meta['deathday']
@@ -441,8 +433,7 @@ pt:
                 try:
                     from resources.lib.db import cDb
                     with cDb() as db:
-       
-                 db.insert_bookmark(metaBM)
+                        db.insert_bookmark(metaBM)
                 except:
                     pass
 
@@ -492,8 +483,7 @@ pt:
             self.close()
 
         def onAction(self, action):
-            if action.getId() in (104, 105, 1
-, 2):
+            if action.getId() in (104, 105, 1, 2):
                 return
 
             if action.getId() in (9, 10, 11, 30, 92, 216, 247, 257, 275, 61467, 61448):
