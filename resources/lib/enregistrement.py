@@ -24,7 +24,7 @@ class cEnregistremement:
         heureFin = oGui.showKeyBoard(heading = "Heure de fin d'enregistrement au format Heure-Minute")
         if not heureFin:
             return
-        titre = oGui.showKeyBoard(heading = "Titre de l'enregistrement").replace("'", "\'")
+        titre = oGui.showKeyBoard(heading = "Titre de l'enregistrement").replace("'", "\\'")
         if not titre:
             return
 
