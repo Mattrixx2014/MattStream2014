@@ -350,7 +350,8 @@ class cHome:
 
         # SI plusieurs sources proposent la TNT
         # oOutputParameterHandler.addParameter('siteUrl', 'CHAINE_TV')
-        # oGui.addDir(SITE_IDENTIFIER, 'callpluging', self.addons.VSlang(30332), 'host.png', oOutputParameterHandler)
+    
+    # oGui.addDir(SITE_IDENTIFIER, 'callpluging', self.addons.VSlang(30332), 'host.png', oOutputParameterHandler)
         # SINON accès direct à la seule source
         oOutputParameterHandler.addParameter('siteUrl', 'TV')
         oGui.addDir('freebox', 'showWeb', self.addons.VSlang(30332), 'tv.png', oOutputParameterHandler)
