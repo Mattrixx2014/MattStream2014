@@ -65,8 +65,7 @@ class cDownloadProgressBar(threading.Thread):
         self.file = None
         self.__oDialog = None
 
-    def createProcessDi
-alog(self):
+    def createProcessDialog(self):
         self.__oDialog = xbmcgui.DialogProgressBG()
         self.__oDialog.create('Download')
         return self.__oDialog
@@ -128,8 +127,7 @@ alog(self):
                 self.RefreshDownloadList()
             except:
                 pass
-     
-   else:
+        else:
             meta['status'] = 0
             try:
                 with cDb() as db:
@@ -183,8 +181,7 @@ alog(self):
             # Recuperation des headers du lien
             headers = {}
             if len(self.__sUrl.split('|')) > 1:
-                u = sel
-f.__sUrl.split('|')[1].split('&')
+                u = self.__sUrl.split('|')[1].split('&')
                 for i in u:
                     headers[i.split('=')[0]] = i.replace(i.split('=')[0] + '=', '')
 
@@ -246,8 +243,7 @@ class cDownload:
         if iBytes == 0:
             return '0 MB'
 
-        return "{
-:,.{}f} MB".format( iBytes/(1024*1024.0), 0 ).replace(',', ' ')
+        return "{:,.{}f} MB".format( iBytes/(1024*1024.0), 0 ).replace(',', ' ')
     
     def isDownloading(self):
         if not xbmc.getCondVisibility('Window.IsVisible(10151)'):
@@ -308,8 +304,7 @@ class cDownload:
             else:
                 extension = None
         else:
-          
-  extension = None
+            extension = None
 
         sTitle = cUtil().CleanName(sTitle)
         # sTitle = cUtil().FormatSerie(sTitle)
@@ -366,8 +361,7 @@ class cDownload:
         if not meta:
             meta = self.GetOnefile()
 
-        xbmcgui.Window(1010
-1).setProperty('SimpleDownloaderQueue', '0')
+        xbmcgui.Window(10101).setProperty('SimpleDownloaderQueue', '0')
         return self.StartDownload(meta)
 
     def ResetDownload(self):
@@ -509,8 +503,7 @@ class cDownload:
             oOutputParameterHandler.addParameter('sMovieTitle', title)
             oOutputParameterHandler.addParameter('sThumbnail', thumbnail)
             oOutputParameterHandler.addParameter('sPath', path)
-            oOutputParameterHandler.ad
-dParameter('sStatus', status)
+            oOutputParameterHandler.addParameter('sStatus', status)
 
             if status == '0':
                 sStatus = ''
@@ -577,8 +570,7 @@ dParameter('sStatus', status)
 
         # resolve url ?
         from resources.lib.gui.hoster import cHosterGui
-        oHost
-er = cHosterGui().checkHoster(sUrl)
+        oHoster = cHosterGui().checkHoster(sUrl)
         oHoster.setUrl(sUrl)
         aLink = oHoster.getMediaLink()
         if not aLink or not aLink[0]:
@@ -632,8 +624,7 @@ er = cHosterGui().checkHoster(sUrl)
         meta = {}
         meta['url'] = sMediaUrl
         meta['cat'] = oInputParameterHandler.getValue('sCat')
-        meta['title'] 
-= sFileName
+        meta['title'] = sFileName
         meta['icon'] = xbmc.getInfoLabel('ListItem.Art(thumb)')
 
         if (self.AddDownload(meta)):
@@ -685,8 +676,7 @@ er = cHosterGui().checkHoster(sUrl)
                             tempo = tempo - 1
                             xbmc.sleep(500)
 
-                        p
-rogress_.VSclose(progress_)
+                        progress_.VSclose(progress_)
 
                         oGuiElement = cGuiElement()
                         oGuiElement.setSiteName(SITE_IDENTIFIER)
