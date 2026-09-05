@@ -39,7 +39,7 @@ def service():
 
     # enregistrement TV
     recordList = xbmcvfs.listdir(path)
-    interval = 55
+    interval = 55  # Vérifier toutes les minutes si un enregistrement est programmé
     ADDON.setSetting('path_enregistrement_programmation', path)
     recordInProgress = False
     monitor = xbmc.Monitor()
@@ -70,7 +70,7 @@ if isMatrix():
     sitesManager = siteManager()
     if sitesManager.isActive('toonanime') or sitesManager.isActive('kaydo_ws'):
         class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
-            "Handle requests in a separate thread."
+            """Handle requests in a separate thread."""
 
         def runServer():
             from resources.lib.proxy.ProxyHTTPRequestHandler import ProxyHTTPRequestHandler
