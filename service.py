@@ -39,7 +39,7 @@ def service():
 
     # enregistrement TV
     recordList = xbmcvfs.listdir(path)
-    interval = 55  # Vérifier toutes les minutes si un enregistrement est programmé
+    interval = 55
     ADDON.setSetting('path_enregistrement_programmation', path)
     recordInProgress = False
     monitor = xbmc.Monitor()
@@ -66,26 +66,26 @@ def service():
 if __name__ == '__main__':
     service()
 
-    if isMatrix():
-        sitesManager = siteManager()
-        if sitesManager.isActive('toonanime') or sitesManager.isActive('kaydo_ws'):
-            class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
-                """Handle requests in a separate thread."""
+if isMatrix():
+    sitesManager = siteManager()
+    if sitesManager.isActive('toonanime') or sitesManager.isActive('kaydo_ws'):
+        class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+            "Handle requests in a separate thread."
 
-            def runServer():
-                from resources.lib.proxy.ProxyHTTPRequestHandler import ProxyHTTPRequestHandler
+        def runServer():
+            from resources.lib.proxy.ProxyHTTPRequestHandler import ProxyHTTPRequestHandler
 
-                server_address = ('127.0.0.1', 2424)
-                httpd = ThreadingHTTPServer(server_address, ProxyHTTPRequestHandler)
+            server_address = ('127.0.0.1', 2424)
+            httpd = ThreadingHTTPServer(server_address, ProxyHTTPRequestHandler)
 
-                server_thread = threading.Thread(target=httpd.serve_forever)
-                server_thread.start()
-                VSlog("Server Start")
+            server_thread = threading.Thread(target=httpd.serve_forever)
+            server_thread.start()
+            VSlog("Server Start")
 
-                monitor = xbmc.Monitor()
+            monitor = xbmc.Monitor()
 
-                while not monitor.abortRequested():
-                    if monitor.waitForAbort(1):
-                        break
+            while not monitor.abortRequested():
+                if monitor.waitForAbort(1):
+                    break
 
-                httpd.shutdown()
+            httpd.shutdown()
