@@ -22,16 +22,15 @@ class cEnregistremement:
 
         heureFichier = oGui.showKeyBoard(heading = "Début d'enregistrement au format Jour-Heure-Minute, vide pour maintenant")
         heureFin = oGui.showKeyBoard(heading = "Heure de fin d'enregistrement au format Heure-Minute")
-        if not heureFin:   # pas de fin, on annule
+        if not heureFin:
             return
-        titre = oGui.showKeyBoard(heading = "Titre de l'enregistrement").replace("'", "\\'")
+        titre = oGui.showKeyBoard(heading = "Titre de l'enregistrement").replace("'", "\'")
         if not titre:
             return
 
 
-        # début non précisé -> enregistrement maintenant
         if not heureFichier:
-            d = datetime.now()
+            d = datetime.datetime.now()
             heureFichier = d.strftime('%d-%H-%M')
 
         heureDebut = GetTimeObject(heureFichier, '%d-%H-%M')
@@ -39,8 +38,7 @@ class cEnregistremement:
         duree = heureFin - heureDebut
 
         marge = ADDON.getSettingString('marge_auto')
-        timedelta = datetime.timedelt
-a(minutes = int(marge))
+        timedelta = datetime.timedelta(minutes=int(marge))
         duree += timedelta
 
         realPath = VSPath(pathEnregistrement + '/' + str(heureFichier) + '.py').replace('\\', '\\\\')
