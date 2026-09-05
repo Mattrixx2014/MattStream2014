@@ -63,9 +63,7 @@ def service():
     # server_thread.join()
 
 
-if 
-__name__ == 
-'__main__':
+if __name__ == '__main__':
     service()
 
     if isMatrix():
