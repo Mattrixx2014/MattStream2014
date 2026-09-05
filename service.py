@@ -63,10 +63,12 @@ def service():
     # server_thread.join()
 
 
-if __name__ == '__main__':
+if 
+__name__ == 
+'__main__':
     service()
 
-    if isMatrix():
+if isMatrix():
         sitesManager = siteManager()
         if sitesManager.isActive('toonanime') or sitesManager.isActive('kaydo_ws'):
             class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
