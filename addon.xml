@@ -14,7 +14,7 @@
         <import addon="script.module.qrcode"/>
         <import addon="script.module.requests"/>
         <import addon="script.module.dnspython" optional="true"/>
-		<import addon="repository.vstream"/>
+		<import addon="script.module.myconnpy"/>
 	<!-- Pour le DEBUG
 	<import addon="script.module.web-pdb" />
 	<import addon="script.module.pydevd" version="4.4.0"/>
